@@ -1,0 +1,260 @@
+[gd_scene load_steps=19 format=3 uid="uid://qp5uro6cqseo"]
+
+[ext_resource type="PackedScene" uid="uid://cwxiljyx04f64" path="res://assets/user_creature.tscn" id="1_340b4"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_esp7u"]
+[ext_resource type="PackedScene" uid="uid://xwms2pelbp61" path="res://assets/bird.tscn" id="2_ijlvu"]
+[ext_resource type="Texture2D" uid="uid://cde3xijo1ct04" path="res://textures/grass_path_3_diff_4k.png" id="2_x87jw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k5poe"]
+sky_top_color = Color(0.338408, 0.609022, 0.969492, 1)
+sky_horizon_color = Color(0.572302, 0.717429, 0.841125, 1)
+ground_horizon_color = Color(0.593729, 0.70035, 0.771795, 1)
+
+[sub_resource type="Sky" id="Sky_ar71p"]
+sky_material = SubResource("ProceduralSkyMaterial_k5poe")
+
+[sub_resource type="Environment" id="Environment_quuak"]
+background_mode = 2
+background_color = Color(0.836825, 0.992217, 0.974173, 1)
+sky = SubResource("Sky_ar71p")
+ambient_light_source = 3
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="Animation" id="Animation_ykgsr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:environment:sky:sky_material:sky_top_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.338408, 0.609022, 0.969492, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:environment:sky:sky_material:sky_horizon_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.572302, 0.717429, 0.841125, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6y6gu"]
+resource_name = "hoizon"
+length = 24.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:environment:sky:sky_material:sky_horizon_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6, 12, 18, 24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.572302, 0.717429, 0.841125, 1), Color(0.82725, 0.667864, 0.451429, 1), Color(0.0316524, 0.166435, 0.227923, 1), Color(0.827451, 0.666667, 0.45098, 1), Color(0.572549, 0.717647, 0.839216, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_l1x7j"]
+resource_name = "sky_color"
+length = 24.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:environment:sky:sky_material:sky_top_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 12, 24),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.338408, 0.609022, 0.969492, 1), Color(0.039588, 2.40654e-07, 0.379769, 1), Color(0.338408, 0.609022, 0.969492, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i7vw8"]
+_data = {
+"RESET": SubResource("Animation_ykgsr"),
+"hoizon": SubResource("Animation_6y6gu"),
+"sky_color": SubResource("Animation_l1x7j")
+}
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_nmhn4"]
+vertices = PackedVector3Array(-39.5, 1, -39.5, -39.5, 1, 39.5, 39.5, 1, 39.5, 39.5, 1, -39.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_svfxg"]
+albedo_texture = ExtResource("2_x87jw")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7b74w"]
+material = SubResource("StandardMaterial3D_svfxg")
+size = Vector3(80, 1, 80)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sv10w"]
+size = Vector3(80, 1, 80)
+
+[sub_resource type="Animation" id="Animation_njvu4"]
+resource_name = "rot"
+length = 24.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6, 12.0333, 18, 21, 23.9667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0), Vector3(0, 1.5708, -1.5708), Vector3(1.5708, 0, 0), Vector3(0, -1.5708, 0), Vector3(-0.785398, -1.5708, 0), Vector3(-1.5708, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 6, 11.9667, 18.0333, 23.9667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 40, 0), Vector3(60, 20, 0), Vector3(0, -40, 0), Vector3(-60, 20, 0), Vector3(0, 40, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8h1ct"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 40, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2o7ws"]
+_data = {
+"RESET": SubResource("Animation_8h1ct"),
+"rot": SubResource("Animation_njvu4")
+}
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_esp7u")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_quuak")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WorldEnvironment"]
+libraries = {
+"": SubResource("AnimationLibrary_i7vw8")
+}
+autoplay = "hoizon"
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_nmhn4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+mesh = SubResource("BoxMesh_7b74w")
+skeleton = NodePath("../..")
+
+[node name="floor body" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/floor body"]
+shape = SubResource("BoxShape3D_sv10w")
+
+[node name="bird" parent="." instance=ExtResource("2_ijlvu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -10)
+
+[node name="population" type="Node3D" parent="."]
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0, 0, 0)
+
+[node name="forest" type="Node3D" parent="."]
+
+[node name="CountLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 24.5465, 48.83)
+visible = false
+pixel_size = 0.05
+
+[node name="user_creature" parent="." instance=ExtResource("1_340b4")]
+transform = Transform3D(-3.49691e-08, 0, -0.8, 0, 0.8, 0, 0.8, 0, -3.49691e-08, 0, 1.37327, 1.38493)
+collision_layer = 3
+
+[node name="spawn_label" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="spawn_label"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="spawn_label/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.999
+anchor_bottom = 1.036
+offset_right = 0.149902
+offset_bottom = -14.256
+theme_override_font_sizes/font_size = 40
+
+[node name="fruit" type="Node3D" parent="."]
+
+[node name="berry_label" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="berry_label"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1150.0
+offset_bottom = 646.0
+
+[node name="Label" type="Label" parent="berry_label/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -266.0
+offset_bottom = 132.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 40
+
+[node name="sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 40, 0)
+shadow_enabled = true
+shadow_opacity = 0.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="sun"]
+libraries = {
+"": SubResource("AnimationLibrary_2o7ws")
+}
+autoplay = "rot"

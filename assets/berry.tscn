@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://fnnm4ryq8jxa"]
+
+[ext_resource type="Texture2D" uid="uid://dludb7rd83nll" path="res://textures/berry_txture.jpg" id="1_0l234"]
+[ext_resource type="Script" path="res://scripts/berry.gd" id="1_y4kvh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ggawm"]
+albedo_texture = ExtResource("1_0l234")
+
+[sub_resource type="SphereMesh" id="SphereMesh_hmn7p"]
+material = SubResource("StandardMaterial3D_ggawm")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_b3cuf"]
+
+[node name="berry" type="Node3D"]
+script = ExtResource("1_y4kvh")
+
+[node name="top" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_hmn7p")
+skeleton = NodePath("")
+
+[node name="berry_bod" type="Area3D" parent="top"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="top/berry_bod"]
+shape = SubResource("SphereShape3D_b3cuf")
+
+[connection signal="body_entered" from="top/berry_bod" to="." method="_on_static_body_3d_body_entered"]

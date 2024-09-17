@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://chyl02okuwfnq"]
+
+[ext_resource type="FontFile" uid="uid://dc4n8880dia23" path="res://fonts/ThatNogoFontCasual.ttf" id="1_87juy"]
+[ext_resource type="FontFile" uid="uid://dc82bb4eofkpu" path="res://fonts/Semyon Soviet.ttf" id="2_52cll"]
+[ext_resource type="Script" path="res://scripts/run_sim_button.gd" id="3_21i6w"]
+
+[node name="Control" type="Control"]
+layout_direction = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -184.0
+offset_right = 184.0
+offset_bottom = 245.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0.709804, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0.807843, 1)
+theme_override_fonts/font = ExtResource("1_87juy")
+theme_override_font_sizes/font_size = 120
+text = "SpawnR
+3D"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="run_sim_button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.5
+offset_top = -83.5
+offset_right = 69.5
+offset_bottom = 83.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_52cll")
+theme_override_font_sizes/font_size = 50
+text = "Click
+to
+Spawn"
+icon_alignment = 1
+script = ExtResource("3_21i6w")
+
+[connection signal="pressed" from="run_sim_button" to="run_sim_button" method="_on_pressed"]

@@ -1,0 +1,88 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0xc255aabvmc"]
+
+[ext_resource type="FontFile" uid="uid://dc4n8880dia23" path="res://fonts/ThatNogoFontCasual.ttf" id="1_kr46f"]
+[ext_resource type="Script" path="res://scripts/game_over_screen.gd" id="1_um4vi"]
+[ext_resource type="FontFile" uid="uid://dc82bb4eofkpu" path="res://fonts/Semyon Soviet.ttf" id="3_g8t5t"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_um4vi")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Game Over" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -574.5
+offset_right = 574.5
+offset_bottom = 172.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.988235, 0.188235, 0.054902, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_kr46f")
+theme_override_font_sizes/font_size = 120
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="Total Spawns" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -108.0
+offset_top = -21.5
+offset_right = 108.0
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.447059, 0.827451, 0.313726, 1)
+theme_override_fonts/font = ExtResource("3_g8t5t")
+theme_override_font_sizes/font_size = 40
+text = "Total Spawns"
+horizontal_alignment = 1
+
+[node name="number" type="Label" parent="Total Spawns"]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 56.5
+offset_right = 117.0
+offset_bottom = 111.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+
+[node name="respawn_button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -224.0
+offset_right = 90.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_g8t5t")
+theme_override_font_sizes/font_size = 50
+text = "Click
+to
+Respawn"
+icon_alignment = 1
+
+[connection signal="pressed" from="respawn_button" to="." method="_on_respawn_button_pressed"]

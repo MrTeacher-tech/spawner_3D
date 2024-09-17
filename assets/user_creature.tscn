@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://cwxiljyx04f64"]
+
+[ext_resource type="Script" path="res://scripts/user_creature_v2.gd" id="1_v1c38"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xdaj4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t3fs8"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_nqped"]
+material = SubResource("StandardMaterial3D_t3fs8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fisb7"]
+albedo_color = Color(0.054902, 0.054902, 0.054902, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_sqo38"]
+material = SubResource("StandardMaterial3D_fisb7")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_njijb"]
+
+[node name="user_creature" type="CharacterBody3D"]
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0, 0, 0)
+script = ExtResource("1_v1c38")
+
+[node name="torso collide" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_xdaj4")
+
+[node name="torso" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_nqped")
+
+[node name="head" type="Node3D" parent="."]
+
+[node name="right eye" type="MeshInstance3D" parent="head"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.164503, 0.73648, 0.410179)
+mesh = SubResource("SphereMesh_sqo38")
+skeleton = NodePath("../..")
+
+[node name="left eye" type="MeshInstance3D" parent="head"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.165, 0.736, 0.41)
+mesh = SubResource("SphereMesh_sqo38")
+skeleton = NodePath("../..")
+
+[node name="left arm" type="MeshInstance3D" parent="head"]
+transform = Transform3D(0.234608, 0.0863655, 0, -0.0863655, 0.234608, 0, 0, 0, 0.25, -0.522763, 0.173, 0.114795)
+mesh = SubResource("CapsuleMesh_nqped")
+skeleton = NodePath("../..")
+
+[node name="right arm" type="MeshInstance3D" parent="head"]
+transform = Transform3D(0.234647, -0.086259, 2.60513e-09, 0.086259, 0.234647, -7.08168e-09, -1.7133e-12, 7.54566e-09, 0.25, 0.523, 0.173, 0.115)
+mesh = SubResource("CapsuleMesh_nqped")
+skeleton = NodePath("../..")
+
+[node name="left leg" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.415083, -0.793539, -0.00284511)
+mesh = SubResource("CapsuleMesh_nqped")
+
+[node name="right leg" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.415, -0.794, -0.003)
+mesh = SubResource("CapsuleMesh_nqped")
+
+[node name="CamPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.812747, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CamPivot"]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -0.433545, 1.04427, -2.88258)
+
+[node name="berry_zone" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="berry_zone"]
+shape = SubResource("CapsuleShape3D_njijb")
+
+[connection signal="area_entered" from="berry_zone" to="." method="_on_berry_zone_area_entered"]
